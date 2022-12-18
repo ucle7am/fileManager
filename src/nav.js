@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import { transfromPath } from "./utils/transfromPath.js";
 
 
 export const navListener = async (commands) => {
@@ -28,9 +29,7 @@ export const navListener = async (commands) => {
       break;
     case 'cd':
       try{
-
-        const transformedPath = commands[1].split('/').join(path.sep);
-        const newPath = path.isAbsolute(commands[1]) ? transformedPath : process.env.homedir + path.sep + transformedPath;
+        const newPath = transfromPath(commands[1])
         await fs.readdir(newPath);
         process.env.homedir = newPath;
         console.log(process.env.homedir);

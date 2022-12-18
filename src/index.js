@@ -1,6 +1,8 @@
 // console.log(process.argv)
 import os from 'os';
+import path from 'path';
 import { mainCommands } from './constants/commands.js';
+import { fsListener } from './fs.js';
 import { navListener } from './nav.js';
 import { parseCliArgs } from "./utils/parseCliArgs.js";
 
@@ -23,7 +25,7 @@ process.stdin.on('data', (data) => {
       navListener(commands);
       break;
     case mainCommands.fs.includes(frst):
-      console.log('fs')
+      fsListener(commands);
       break;
     case mainCommands.os.includes(frst):
       console.log('os')
