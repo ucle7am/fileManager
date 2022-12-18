@@ -1,0 +1,24 @@
+{
+  "name": "filemanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ucle7am/fileManager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ucle7am/fileManager/issues"
+  },
+  "homepage": "https://github.com/ucle7am/fileManager#readme",
+  "dependencies": {
+    "@types/node": "^18.11.16"
+  }
+}
