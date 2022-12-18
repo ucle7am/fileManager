@@ -5,7 +5,11 @@ import { mainCommands } from './constants/commands.js';
 import { fsListener } from './fs.js';
 import { navListener } from './nav.js';
 import { osListener } from './os.js';
+import { calculateHash } from './utils/calculateHash.js';
 import { parseCliArgs } from "./utils/parseCliArgs.js";
+import { transfromPath } from './utils/transfromPath.js';
+import { unzip } from './utils/unzip.js';
+import { zip } from './utils/zip.js';
 
 const {'--username': username} = parseCliArgs(process.argv);
 console.log(`Welcome to the File Manager, ${username}!`);
@@ -29,14 +33,31 @@ process.stdin.on('data', (data) => {
       fsListener(commands);
       break;
     case mainCommands.os.includes(frst):
-      // console.log('os')
       osListener(commands)
       break;
     case mainCommands.hash.includes(frst):
-      console.log('first')
+      const currPath = transfromPath(commands[1]);
+      calculateHash(currPath).then(console.log);
       break;
     case mainCommands.zip.includes(frst):
-      console.log('first')
+      const zipPath = commands[1] && transfromPath(commands[1]);
+      const zipDest = commands[2] && transfromPath(commands[2]);
+      if(!zipPath && !zipDest){
+        console.log("\x1b[31m", new Error('Invalid input'));
+        break;
+      }
+      switch (frst) {
+        case 'compress':
+          zip(zipPath, zipDest);
+          break;
+        case 'decompress':
+          unzip(zipPath, zipDest);
+          break;
+        
+        default:
+          console.log("\x1b[31m", new Error('Invalid input'));
+          break;
+      }
       break;
     case frst.includes('exit'):
       exit()
