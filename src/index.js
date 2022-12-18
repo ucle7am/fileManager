@@ -4,6 +4,7 @@ import path from 'path';
 import { mainCommands } from './constants/commands.js';
 import { fsListener } from './fs.js';
 import { navListener } from './nav.js';
+import { osListener } from './os.js';
 import { parseCliArgs } from "./utils/parseCliArgs.js";
 
 const {'--username': username} = parseCliArgs(process.argv);
@@ -28,7 +29,8 @@ process.stdin.on('data', (data) => {
       fsListener(commands);
       break;
     case mainCommands.os.includes(frst):
-      console.log('os')
+      // console.log('os')
+      osListener(commands)
       break;
     case mainCommands.hash.includes(frst):
       console.log('first')
